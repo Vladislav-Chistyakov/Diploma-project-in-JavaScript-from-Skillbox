@@ -1,4 +1,36 @@
+//функция создания даты в реальном времени
+function createData() {
+  let data = new Date()
+  let craeteYear = data.getFullYear()
+  let craeteMonth = data.getMonth()
+  let craeteDay = data.getDate()
+  let craeteHours = data.getHours()
+  let craeteMinutes = data.getMinutes()
 
+  function newMonth() {
+    let newMonth = craeteMonth + 1
+    if (newMonth < 10) {
+      newMonth = '0' + newMonth
+    }
+    return newMonth
+  }
+
+  const infoDateFull = {
+    year: craeteYear,
+    month: newMonth(),
+    day: craeteDay,
+    hours: craeteHours,
+    minutes: craeteMinutes,
+
+  }
+
+  const infoDate = {
+    dayMonthYear: `${infoDateFull.day}.${infoDateFull.month}.${infoDateFull.year}`,
+    hoursMinutes: `${infoDateFull.hours}:${infoDateFull.minutes}`,
+  }
+
+  return infoDate
+}
 
 //функция открытия модального окна
 function activeModal(element) {
@@ -311,11 +343,13 @@ function modalCreationContact() {
 
 
     //Создания объекта с данными о клиенте
-    const newContactValue = { id: 1, name: `${surnameInput.value} ${nameInput.value} ${patronymicInput.value}`, dataCreate: ['10.10.2000', '16:00'], dataChange: ['10.10.2000', '16:00'], contacts: '@@@' }
-    //const arrayContact = { id: 1, name: 'Чистяков Владислав Евгеньевич', dataCreate: ['10.10.2000', '16:00'], dataChange: ['10.10.2000', '16:00'], contacts: '@@@' }
-    const arrayConta = { id: 1, name: 'Чистяков Владислав Евгеньевич', dataCreate: ['10.10.2000', '16:00'], dataChange: ['10.10.2000', '16:00'], contacts: '@@@' }
-
-
+    const newContactValue = {
+      id: 1,
+      name: `${surnameInput.value} ${nameInput.value} ${patronymicInput.value}`,
+      dataCreate: [`${createData().dayMonthYear}`, `${createData().hoursMinutes}`],
+      dataChange: [`${createData().dayMonthYear}`, `${createData().hoursMinutes}`],
+      contacts: '@@@'
+    }
 
     //Очищение модального окна
     //clearingModalWindow(moduleBox, btnAddContact)
@@ -381,12 +415,10 @@ function modalCreationContact() {
       document.querySelector('tbody').append(tr)
     }
 
+    //Выводим контакт в таблицу
     tableContact(newContactValue)
-
-
+    // Вызываем функцию очищение и закрытия модального окна
     closeModal(e, moduleBox, btnAddContact)
-
-
 
     console.log(newContactValue)
   })
