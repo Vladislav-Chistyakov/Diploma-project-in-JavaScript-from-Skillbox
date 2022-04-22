@@ -283,7 +283,41 @@ function modalCreationContact() {
     }
   })
 
-  let contact = ''
+
+  function svgContact(select, box) {
+    const block = document.createElement('div')
+    block.classList.add('contacts-block-1')
+    for (let i = 0; i <= (select.length - 1); ++i) {
+      const img = document.createElement('img')
+      if (select[i] === 'Facebook') {
+        console.log('fac')
+        img.src = "../img/contacts/fb.svg"
+        block.append(img)
+      }
+      if (select[i] === 'Телефон') {
+        console.log('Телефон')
+        img.src = "../img/contacts/phone.svg"
+        block.append(img)
+      }
+      if (select[i] === 'Email') {
+        console.log('Email')
+        img.src = "../img/contacts/mail.svg"
+        block.append(img)
+      }
+      if (select[i] === 'Другое') {
+        console.log('Другое')
+        img.src = "../img/contacts/contact.svg"
+        block.append(img)
+      }
+      if (select[i] === 'VK') {
+        console.log('vk')
+        img.src = "../img/contacts/vk.svg"
+        block.append(img)
+      }
+
+    }
+    return block
+  }
 
 
   //Создания события на кнопке сохранить
@@ -308,6 +342,10 @@ function modalCreationContact() {
     for (let input of inputs) {
       arrayContact.push(input.value)
     }
+
+    console.log(arraySelect, arrayContact)
+
+
 
 
     //function filteringFormValues(input) {
@@ -348,7 +386,7 @@ function modalCreationContact() {
       name: `${surnameInput.value} ${nameInput.value} ${patronymicInput.value}`,
       dataCreate: [`${createData().dayMonthYear}`, `${createData().hoursMinutes}`],
       dataChange: [`${createData().dayMonthYear}`, `${createData().hoursMinutes}`],
-      contacts: '@@@'
+      contacts: '',
     }
 
     //Очищение модального окна
@@ -386,7 +424,8 @@ function modalCreationContact() {
       tdName.textContent = obect.name
       tdDataCreate.textContent = obect.dataCreate[0]
       tdDataChange.textContent = obect.dataChange[0]
-      tdContacts.textContent = obect.contacts
+      tdContacts.append(svgContact(arraySelect))
+
 
       spanDataCreate.textContent = obect.dataCreate[1]
       spanDataChange.textContent = obect.dataChange[1]
@@ -402,11 +441,12 @@ function modalCreationContact() {
 
       //Добавляем событие на кнопку "Удалить"
       actionBtnDelete.addEventListener('click', () => {
+        console.log(actionBtnDelete)
         //modal.modalDelete
         const modal = document.querySelector('.module-delete__box-delete')
         activeModal(modal)
-        document.querySelector('.modal-background').addEventListener('click', (e) => {
-          console.log(e)
+        document.querySelector('.module-delete__box-delete').addEventListener('click', (e) => {
+          console.log('Событие кнопки удалить')
         })
       })
 

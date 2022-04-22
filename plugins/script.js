@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
       //modal.modalDelete
       const modal = document.querySelector('.module-delete__box-delete')
       activeModal(modal)
-      document.querySelector('.modal-background').addEventListener('click', (e) => {
-        console.log(e)
+      document.querySelector('.module-delete__box-delete').addEventListener('click', (e) => {
+        console.log('Событие кнопки удалить')
       })
     })
 
